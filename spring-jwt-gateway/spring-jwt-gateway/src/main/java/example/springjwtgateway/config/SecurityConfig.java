@@ -42,17 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(accountService)
                 .passwordEncoder(passwordEncoder);
-    }
-    //maneger의 옵션을 부여해 구현
+    } //maneger의 옵션을 부여해 구현
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().mvcMatchers("/docs/index.html");
         web.ignoring().mvcMatchers("/actuator");
-    }
-    //시큐리티 필터를 적용할지 말지를 설정
+    } //시큐리티 필터를 적용할지 말지를 설정
+
 
     /*
+    Resource Config 에서 설정할 부분 제거
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
