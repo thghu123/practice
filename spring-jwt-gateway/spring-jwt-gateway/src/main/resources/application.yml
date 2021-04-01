@@ -1,0 +1,48 @@
+server:
+  port: 5000
+
+management:
+#  endpoint:
+#    gateway:
+#      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*" #gateway
+
+spring:
+  application:
+    name: sample-api-gateway
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: reporting-service
+#          uri: http://localhost:8081
+##          uri: http://naver.com
+#          predicates:
+#            - Path=/**
+##          filters:
+##            - AuthFilter
+
+  jpa:
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    username: postgres
+    password:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    driverClassName: org.postgresql.Driver
+
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

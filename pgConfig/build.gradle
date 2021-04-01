@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	//netty
+	implementation group: 'io.netty', name: 'netty-all', version: '4.1.24.Final'
+
+	//jpa
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.data:spring-data-jdbc')
+
+	implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
+	implementation group: 'com.google.guava', name: 'guava', version: '20.0'
+	implementation group: 'org.javassist', name: 'javassist', version: '3.21.0-GA'
+
+	//security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+	//view
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	//datasource
+	compile('org.postgresql:postgresql')
+
+	//util
+	compile('org.projectlombok:lombok')
+	annotationProcessor('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+//	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//	}
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+	useJUnitPlatform()
+}
