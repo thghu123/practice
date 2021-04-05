@@ -2,7 +2,19 @@ server:
   port:
     8081
 
+eureka:
+  client:
+    register-with-eureka: true # false : unuse
+    fetch-registry: true #false
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 spring:
+
+  application:
+    name: api-service
+
+
   jpa:
     properties:
       hibernate.format_sql: true
@@ -22,11 +34,11 @@ spring:
       roles: USER
 #    disable: true # temporary
 
+  output:
+    ansi:
+      enabled: always
+
 logging:
   level:
     org.hibernate.type.descriptor.sql: trace
     example.pgConfig: info
-
-output:
-  ansi:
-    enabled: always
