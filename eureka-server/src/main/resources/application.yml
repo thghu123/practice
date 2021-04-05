@@ -8,6 +8,6 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://localhost:8761/eureka
-  server:
-    #for remove error messgae
-    renewalPercentThreshold: 0.85
+#  server:
+#    #for remove error messgae
+#    renewalPercentThreshold: 0.85

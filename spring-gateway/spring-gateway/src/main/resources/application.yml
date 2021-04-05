@@ -12,23 +12,52 @@ spring:
   application:
     name: gateway-service
 
-
-#라우팅 -> config 파일로 설정
+  #라우팅 -> config 파일로 설정
 
   cloud:
     gateway:
       routes:
+
+        #로그인과 회원가입 시 검증 필터 X
+
+#        - id: api-service
+#          #url : 엔드포인트를 어디로 포워드 시켜줄 것인지
+#          uri: lb://API-SERVICE  #http://localhost:8081/
+#          #predicates : 클라이언트가 어떤 요청, 조건을 보내면 uri로 포워드 할 것인지
+#          predicates:
+#            - Path=/user-service/login
+#            - Method=GET
+#
+#        - id: api-service
+#          uri: lb://API-SERVICE  #http://localhost:8081/
+#          predicates:
+#            - Path=/user-service/users
+#            - Method=GET
+
+#        # get 방식으로 들어오는 user service rtm 정보에는 검증 필요
+
+#        - id: api-service
+#            uri: lb://API-SERVICE  #http://localhost:8081/
+#            predicates:
+#              - Path=/user-service/**
+#              - Method=GET
+#              - AuthorizationHeaderFilter
+
         - id: api-service
-          #url : 엔드포인트를 어디로 포워드 시켜줄 것인지
           uri: lb://API-SERVICE  #http://localhost:8081/
-          #predicates : 클라이언트가 어떤 요청, 조건을 보내면 uri로 포워드 할 것인지
           predicates:
             - Path=/rtm/**
+            - Method=GET
+            - AuthorizationHeaderFilter
 
-#        - id: naver-service
-#          uri: http://naver.com
-#          predicates:
-#            - Path=/blog/**
+  #        - id: naver-service
+  #          uri: http://naver.com
+  #          predicates:
+  #            - Path=/blog/**
+
   output:
     ansi:
       enabled: always
+
+token:
+  secret: user_token
