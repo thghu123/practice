@@ -1,0 +1,27 @@
+server:
+  port: 5000
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registy: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: api-service
+          #url : 엔드포인트를 어디로 포워드 시켜줄 것인지
+          uri: http://localhost:8081/
+          #predicates : 클라이언트가 어떤 요청, 조건을 보내면 uri로 포워드 할 것인지
+          predicates:
+            - Path=/rtm/**
+
+        - id: naver-service
+          uri: http://naver.com
+          predicates:
+            - Path=/naver/**

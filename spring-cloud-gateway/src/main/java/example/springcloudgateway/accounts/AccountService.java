@@ -1,8 +1,8 @@
 package example.springcloudgateway.accounts;
 
-import example.springjwtgateway.accounts.domain.Account;
-import example.springjwtgateway.accounts.domain.AccountRole;
-import example.springjwtgateway.accounts.repo.AccountRepository;
+import example.springcloudgateway.accounts.domain.Account;
+import example.springcloudgateway.accounts.domain.AccountRole;
+import example.springcloudgateway.accounts.repo.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,10 +22,8 @@ import java.util.stream.Collectors;
 public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public Account saveAccount(Account account) {
-        account.setPassword(this.passwordEncoder.encode(account.getPassword()));
         return this.accountRepository.save(account);
     } //저장 시 엔코더를 적용
 

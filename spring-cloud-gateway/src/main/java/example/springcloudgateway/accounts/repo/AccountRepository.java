@@ -1,6 +1,6 @@
 package example.springcloudgateway.accounts.repo;
 
-import example.springjwtgateway.accounts.domain.Account;
+import example.springcloudgateway.accounts.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
