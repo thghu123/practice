@@ -4,13 +4,17 @@ server:
 eureka:
   client:
     register-with-eureka: false
-    fetch-registy: false
+    fetch-registry: false
     service-url:
       defaultZone: http://localhost:8761/eureka
 
 spring:
   application:
     name: gateway-service
+
+
+#라우팅 -> config 파일로 설정
+
   cloud:
     gateway:
       routes:
@@ -24,4 +28,4 @@ spring:
         - id: naver-service
           uri: http://naver.com
           predicates:
-            - Path=/naver/**
+            - Path=/blog/**
