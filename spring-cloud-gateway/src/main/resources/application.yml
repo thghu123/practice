@@ -1,0 +1,32 @@
+server:
+  port:
+    8081
+
+spring:
+  jpa:
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: none
+
+  datasource:
+    username: postgres
+    password:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    driverClassName: org.postgresql.Driver
+
+  security:
+    user:
+      name: gm
+      password: 1234
+      roles: USER
+#    disable: true # temporary
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace
+    example.pgConfig: info
+
+output:
+  ansi:
+    enabled: always

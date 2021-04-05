@@ -1,15 +1,13 @@
-package example.springjwtgateway.config;
+package example.springjwtgateway.oauth2_security_tmp;
 
 import example.springjwtgateway.BaseControllerTest;
 import example.springjwtgateway.accounts.AccountService;
 import example.springjwtgateway.accounts.domain.Account;
 import example.springjwtgateway.accounts.domain.AccountRole;
-import org.apache.tomcat.util.descriptor.web.FragmentJarScannerCallback;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Set;

@@ -14,16 +14,23 @@ spring:
   application:
     name: sample-api-gateway
 
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: reporting-service
-#          uri: http://localhost:8081
-##          uri: http://naver.com
-#          predicates:
-#            - Path=/**
-##          filters:
-##            - AuthFilter
+  cloud:
+    gateway:
+      #동적 라우팅 설정
+      routes:
+        - id: reporting-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/rtm/**
+#          filters:
+#            - AuthFilter
+
+        - id: naver
+          uri: http://naver.com
+          predicates:
+            - Path=/naver
+      #          filters:
+      #            - AuthFilter
 
   jpa:
     properties:

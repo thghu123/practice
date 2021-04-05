@@ -17,15 +17,7 @@ configurations {
 repositories {
 	mavenCentral()
 }
-
-ext {
-	set('springCloudVersion', "Hoxton.SR10")
-}
-
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -51,6 +43,7 @@ dependencies {
 
 	//view
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//	compile("org.springframework.boot:spring-boot-starter-tomcat")
 
 	//datasource
 	compile('org.postgresql:postgresql')
@@ -65,15 +58,27 @@ dependencies {
 			// excludeEngines 'junit-jupiter'
 		}
 	}
-/*
 
-	compile ('org.springframework.cloud:spring-cloud-starter-gateway'){
-		exclude module : 'spring-cloud-starter'
-		exclude module : 'spring-boot-starter-webflux'
-	}
-*/
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.4.2'
+	implementation group: 'io.netty', name: 'netty-codec-http', version: '4.1.57.Final'
+	//spring cloud gateway : reactor base -> so , need netty dependency
+
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-gateway', version: '2.2.7.RELEASE'
+//	spring cloud gateway can't support with starter-web
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+	compileOnly 'org.projectlombok:lombok'
+
+
+
 
 }
+
+ext {
+	set('springCloudVersion', "Hoxton.SR10")
+}
+
 
 dependencyManagement {
 	imports {

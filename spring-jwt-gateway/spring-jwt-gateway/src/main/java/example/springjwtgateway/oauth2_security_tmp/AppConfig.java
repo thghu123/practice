@@ -1,9 +1,8 @@
-package example.springjwtgateway.config;
+package example.springjwtgateway.oauth2_security_tmp;
 
 import example.springjwtgateway.accounts.AccountService;
 import example.springjwtgateway.accounts.domain.Account;
 import example.springjwtgateway.accounts.domain.AccountRole;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 
 import java.util.Set;
 
@@ -30,7 +28,7 @@ public class AppConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     } //prefix를 패스워드 앞에 붙여 적절한 엔코더를 확인할 수 있다.
 
-    
+
     //application 실행 시 계정 생성
     @Bean
     public ApplicationRunner applicationRunner(){
@@ -48,9 +46,8 @@ public class AppConfig {
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
                 accountService.saveAccount(gyumin);
+
             }
         };
     }
-
-
 }

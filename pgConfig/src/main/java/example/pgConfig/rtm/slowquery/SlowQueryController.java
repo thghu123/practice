@@ -16,7 +16,7 @@ import java.util.List;
 public class SlowQueryController {
 //    private final SlowQueryCollector slowQueryCollector;
 
-    @GetMapping("/rtm/v1/slowquery/{instanceId}")
+    @GetMapping("/rtm/slowquery/{instanceId}")
     public ResponseEntity<List<SlowQueryMessage>> slowQuery(@PathVariable long instanceId) {
 //        return ResponseEntity.ok(slowQueryCollector.current(instanceId));
         return ResponseEntity.ok(List.of(
