@@ -43,6 +43,9 @@ dependencies {
 	//object mapper
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 
+	//jwt successful authentication -> create token in Authentication Filter
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

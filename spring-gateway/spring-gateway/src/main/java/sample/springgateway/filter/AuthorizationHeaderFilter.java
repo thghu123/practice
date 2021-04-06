@@ -51,7 +51,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             }
 
             return chain.filter(exchange);
-            //logic
 
         }));
 
