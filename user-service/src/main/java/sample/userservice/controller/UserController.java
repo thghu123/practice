@@ -46,11 +46,12 @@ public class UserController {
         //회원 생성 정보 출력 -> ResponseUser
         ResponseUser responseUser = mapper.map(userDto, ResponseUser.class); //user dto에서 responseUser로 변환
 
-
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
         //200이 아닌 201이라는 성공 코드 + 정보
 
         //test : postman에서 POST 방식으로 테스팅 - /users + 회원정보 전달
     }
+
+
 
 }

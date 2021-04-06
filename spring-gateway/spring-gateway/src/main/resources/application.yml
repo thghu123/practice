@@ -18,28 +18,38 @@ spring:
     gateway:
       routes:
 
-        #로그인과 회원가입 시 검증 필터 X
-
-#        - id: api-service
-#          #url : 엔드포인트를 어디로 포워드 시켜줄 것인지
-#          uri: lb://API-SERVICE  #http://localhost:8081/
-#          #predicates : 클라이언트가 어떤 요청, 조건을 보내면 uri로 포워드 할 것인지
-#          predicates:
-#            - Path=/user-service/login
-#            - Method=GET
-#
-#        - id: api-service
-#          uri: lb://API-SERVICE  #http://localhost:8081/
-#          predicates:
-#            - Path=/user-service/users
-#            - Method=GET
-
-#        # get 방식으로 들어오는 user service rtm 정보에는 검증 필요
+#로그인 - 검증 필터 X
 
         - id: user-service
-          uri: lb://USER-SERVICES
+          uri: lb://USER-SERVICE  # 기본 설정 (Eureka X) -> http://localhost:8081
+          #url : 엔드포인트를 어디로 포워드 시켜줄 것인지
+          predicates:
+          #predicates : 클라이언트가 어떤 요청, 조건을 보내면 uri로 포워드 할 것인지
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            # /user-service/login으로 요청 시 /login으로 Path Rewrite
+
+#회원가입 - 검증 필터 X
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+
+# user-service GET요청 - service : welcome, active-check
+
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+# get 방식으로 들어오는 user service rtm 정보에는 검증 필요
 
         - id: api-service
           uri: lb://API-SERVICE  #http://localhost:8081/
@@ -48,11 +58,6 @@ spring:
             - Method=GET
           filters:
             - AuthorizationHeaderFilter
-
-  #        - id: naver-service
-  #          uri: http://naver.com
-  #          predicates:
-  #            - Path=/blog/**
 
   output:
     ansi:

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: user-services
+    name: user-service
 
   jpa:
     properties:
@@ -36,3 +36,7 @@ eureka:
 
 greeting:
   message: welcome to the DB monitoring system
+
+loggin:
+  level:
+    sample.userservice: DEBUG

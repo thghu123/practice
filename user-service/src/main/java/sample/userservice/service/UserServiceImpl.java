@@ -3,6 +3,9 @@ package sample.userservice.service;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +14,7 @@ import sample.userservice.dto.UserDto;
 import sample.userservice.jpa.UserEntity;
 import sample.userservice.jpa.UserRepository;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -19,6 +23,18 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository.findByEmail(username);
+
+        if (userEntity == null) throw new UsernameNotFoundException(username);
+
+        //UserDetail > User 생성자의 인자 확인
+        return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
+                true,true,true,true,
+                new ArrayList<>());
+    }
 
     @Override
     @Transactional
@@ -43,5 +59,18 @@ public class UserServiceImpl implements UserService{
         UserDto returnUserDto = mapper.map(userEntity, UserDto.class); //잘 변환됐는지 확인
 
         return returnUserDto;
+    }
+
+    @Override
+    @Transactional
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+        return userDto;
     }
 }
