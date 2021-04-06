@@ -1,0 +1,38 @@
+server:
+  port: 8085 #0 random port
+
+spring:
+  application:
+    name: user-services
+
+  jpa:
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    username: postgres
+    password:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    driverClassName: org.postgresql.Driver
+
+  output:
+    ansi:
+      enabled: always
+
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    #:${spring.application.instance_id:${random.value}}
+    #랜덤 포트의 경우 유레카에서 중복 id 생성할 수 있음. 고유 ID 생성
+  client:
+    register-with-eureka: true
+    fetch-register: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      #등록될 유레카 서버 설정
+
+greeting:
+  message: welcome to the DB monitoring system

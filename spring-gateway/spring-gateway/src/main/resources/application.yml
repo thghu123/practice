@@ -36,18 +36,17 @@ spring:
 
 #        # get 방식으로 들어오는 user service rtm 정보에는 검증 필요
 
-#        - id: api-service
-#            uri: lb://API-SERVICE  #http://localhost:8081/
-#            predicates:
-#              - Path=/user-service/**
-#              - Method=GET
-#              - AuthorizationHeaderFilter
+        - id: user-service
+          uri: lb://USER-SERVICES
+          predicates:
+            - Path=/user-service/**
 
         - id: api-service
           uri: lb://API-SERVICE  #http://localhost:8081/
           predicates:
             - Path=/rtm/**
             - Method=GET
+          filters:
             - AuthorizationHeaderFilter
 
   #        - id: naver-service

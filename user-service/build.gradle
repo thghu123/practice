@@ -28,6 +28,22 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	//datasource
+	compile('org.postgresql:postgresql')
+
+	//jpa
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.data:spring-data-jdbc')
+
+	//security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	//object mapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
