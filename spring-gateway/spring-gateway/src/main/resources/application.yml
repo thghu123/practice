@@ -37,6 +37,7 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/users
+
             - Method=POST
 
 # user-service GET요청 - service : welcome, active-check
@@ -47,7 +48,9 @@ spring:
             - Path=/user-service/**
             - Method=GET
           filters:
-            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+#            - DynamicRouteFilter
+#            - AuthorizationHeaderFilter
+#            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
 # get 방식으로 들어오는 user service rtm 정보에는 검증 필요
 
@@ -56,8 +59,16 @@ spring:
           predicates:
             - Path=/rtm/**
             - Method=GET
+#          filters:
+#            - DynamicRouteFilter
+#            - AuthorizationHeaderFilter
+
+        - id: google-service
+          uri: http://google.com
+          predicates:
+            - Path=/blog/**
           filters:
-            - AuthorizationHeaderFilter
+            - CustomerFilter
 
   output:
     ansi:
